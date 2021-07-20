@@ -23,21 +23,7 @@ spec:
             steps {
                 sh ("mvn -Dmaven.repo.local=${HOME}/.m2/repository package -Pdist,yarn-ui -DskipTests -Dtar -Pnative -Drequire.snappy -Drequire.openssl -Drequire.fuse")
 
-                sh '''#!/bin/bash
-
-GITHUB_API=https://api.github.com
-RELEASE_BRANCH=$(git branch | sed -n '/\* /s///p')
-VERSION=$(echo $release | sed 's/.*\([0-9]\.[0-9]\.[0-9]\).*/\1/')
-
-
-release=$(curl -XPOST -H "Authorization:token $GITHUB_TOKEN" \
-    --data "{\"tag_name\": \"$RELEASE_BRANCH\", \"target_commitish\": \"$RELEASE_BRANCH\", \"name\": \"$RELEASE_BRANCH\", \"draft\": false }" \
-    $GITHUB_API/repos/$GITHUB_ORGANIZATION/$GITHUB_REPO/releases)
-
-curl -XPOST -H "Authorization:token $GITHUB_TOKEN" \
-    -H "Content-Type:application/octet-stream" \
-    --upload-file hadoop-dist/target/hadoop-$VERSION.tar.gz $GITHUB_API/repos/$GITHUB_ORGANIZATION/$GITHUB_REPO/releases/$id/assets?name=hadoop-$VERSION.tar.gz
-                '''
+                sh ("./create_release.sh $GITHUB_ORGANIZATION $GITHUB_REPO $GITHUB_TOKEN")
             }
         }
     }
