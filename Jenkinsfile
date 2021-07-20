@@ -16,6 +16,7 @@ spec:
     environment {
         GITHUB_ORGANIZATION = 'gudari'
         GITHUB_REPO         = 'hadoop'
+        RELEASE_NAME        = 'release-3.2.2-arm64'
         GITHUB_TOKEN        = credentials('github_token')
     }
     stages {
@@ -23,7 +24,7 @@ spec:
             steps {
                 sh ("mvn -Dmaven.repo.local=${HOME}/.m2/repository package -Pdist,yarn-ui -DskipTests -Dtar -Pnative -Drequire.snappy -Drequire.openssl -Drequire.fuse")
 
-                sh ("./create_release.sh $GITHUB_ORGANIZATION $GITHUB_REPO $GITHUB_TOKEN")
+                sh ("./create_release.sh $GITHUB_ORGANIZATION $GITHUB_REPO $RELEASE_NAME $GITHUB_TOKEN")
             }
         }
     }
