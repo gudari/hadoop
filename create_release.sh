@@ -8,7 +8,7 @@ GITHUB_TOKEN=$3
 echo "Exporting token and enterprise api to enable github-release tool"
 GITHUB_API=https://api.github.com
 RELEASE_BRANCH=$(git branch | sed -n '/\* /s///p')
-VERSION=$(echo $release | sed 's/.*\([0-9]\.[0-9]\.[0-9]\).*/\1/')
+VERSION=$(echo $RELEASE_BRANCH | sed 's/.*\([0-9]\.[0-9]\.[0-9]\).*/\1/')
 
 
 release=$(curl -XPOST -H "Authorization:token $GITHUB_TOKEN" \
