@@ -2,13 +2,12 @@
 
 GITHUB_ORGANIZATION=$1
 GITHUB_REPO=$2
-RELEASE_NAME=$3
+VERSION=$3
 GITHUB_TOKEN=$4
 
 echo "Exporting token and enterprise api to enable github-release tool"
 GITHUB_API=https://api.github.com
-VERSION=$(echo $RELEASE_NAME | sed 's/.*\([0-9]\.[0-9]\.[0-9]\).*/\1/')
-
+RELEASE_NAME="release-${VERSION}-arm64"
 
 release=$(curl -XPOST -H "Authorization:token $GITHUB_TOKEN" \
     --data "{\"tag_name\": \"$RELEASE_NAME\", \"target_commitish\": \"$RELEASE_NAME\", \"name\": \"$RELEASE_NAME\", \"draft\": false }" \

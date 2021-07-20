@@ -16,7 +16,7 @@ spec:
     environment {
         GITHUB_ORGANIZATION = 'gudari'
         GITHUB_REPO         = 'hadoop'
-        RELEASE_NAME        = 'release-3.2.2-arm64'
+        VERSION             = '3.2.2'
         GITHUB_TOKEN        = credentials('github_token')
     }
     stages {
