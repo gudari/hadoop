@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: jnlp
-    image: gudari/jenkins-agent:4.9-hadoop-arm64
+    image: gudari/jenkins-agent:3206.vb_15dcf73f6a_9-3-jdk11-hadoop-arm64
     imagePullPolicy: Always
 """
         }
